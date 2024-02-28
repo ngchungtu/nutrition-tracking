@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from '../contexts/UserContext'
-import Header from "./Header"
 
 const Diet = () => {
 
@@ -64,12 +63,11 @@ const Diet = () => {
         setTotal(totalCopy);
     }
 
-    console.log('items', items);
-    console.log('user token', loggedUserData.loggedUser.accessToken);
+    // console.log('items', items);
+    // console.log('user token', loggedUserData.loggedUser.accessToken);
 
     return (
         <section className="container diet-container">
-            <Header />
             <input type="date" onChange={(event) => {
                 setDate(new Date(event.target.value));
             }} />

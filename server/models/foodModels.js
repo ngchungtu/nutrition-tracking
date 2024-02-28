@@ -61,7 +61,7 @@ const foodSchema = mongoose.Schema({
     },
     imgUrl: {
         type: String,
-        required: true,
+        required: false,
     }
 
 }, { timestamps: true })

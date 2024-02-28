@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import Food from './Food'
-import Header from './Header'
 
 const Track = () => {
     const [foodItems, setFoodItems] = useState([])
@@ -26,7 +25,7 @@ const Track = () => {
                     setFoodItems(data.food)
                     if (data.message === "Food found") {
                         setFoodItems(data.food)
-                        console.log('data food', data.food);
+                        // console.log('data food', data.food);
                     } else {
                         setFoodItems([])
                     }
@@ -44,7 +43,6 @@ const Track = () => {
 
     return (
         <>
-            <Header />
             <section className="container track-container">
                 <div className="search">
                     <input onChange={searchFood} className='search-inp' type='search' placeholder='Tìm kiếm thực phẩm...' />

@@ -50,8 +50,8 @@ const Food = ({ item }) => {
             },
             quantity: eatenQuantity,
         }
-        console.log('trackFood', track);
-        console.log('user token', loggedUserData.loggedUser.id);
+        // console.log('trackFood', track);
+        // console.log('user token', loggedUserData.loggedUser.id);
 
         fetch('http://localhost:5000/track', {
             method: 'POST',

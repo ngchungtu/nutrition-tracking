@@ -8,7 +8,9 @@ import { UserContext } from './contexts/UserContext';
 import { useState } from 'react';
 import Private from './components/Private';
 import Diet from './components/Diet';
+import FoodList from './components/FoodList';
 import 'remixicon/fonts/remixicon.css'
+import AddFood from './components/AddFood';
 
 function App() {
 
@@ -38,6 +40,8 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/track' element={<Private Component={Track} />} />
             <Route path='/diet' element={<Private Component={Diet} />} />
+            <Route path='/food-list' element={<Private Component={FoodList} />} />
+            <Route path='/add-food' element={<Private Component={AddFood} />} />
             <Route path='*' element={<Notfound />} />
           </Routes>
         </BrowserRouter>

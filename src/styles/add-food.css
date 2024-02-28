@@ -1,0 +1,49 @@
+ .form-container {
+     display: flex;
+     width: 100%;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+ }
+
+ .form-add-food {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     width: 35%;
+ }
+
+ .form-add-food>input {
+     border: none;
+     padding: 10px;
+     background-color: #f3f4f6;
+     border-radius: 7px;
+ }
+
+ .form-add-food>label {
+     font-size: 13px;
+     margin: 10px 0px 0 0;
+     color: #6b7280;
+ }
+
+ .form-submit {
+     display: flex;
+     justify-content: center;
+     margin: 10px;
+ }
+
+ .form-submit>button {
+     border: none;
+     padding: 10px 20px;
+     width: 120px;
+     border-radius: 10px;
+     background-color: #7dd3fc;
+     font-weight: 600;
+     color: #a1a1aa;
+     cursor: pointer;
+ }
+
+ .form-submit>button:hover {
+     background-color: #f59e0b;
+     color: #3f3f46;
+ }
