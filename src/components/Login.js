@@ -30,11 +30,16 @@ const Login = () => {
     e.preventDefault()
     // console.log(userCreds);
 
-    fetch('http://localhost:5500/login', {
+    // fetch('http://localhost:5500/login', {
+    fetch('https://nutrition-tracking.vercel.app/login', {
       method: 'POST',
+      // withCredentials: true,
+      // crossorigin: true,
+      // mode: 'cors',
       body: JSON.stringify(userCreds),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*'
       }
     }).then((response) => {
       if (response.status === 404) {

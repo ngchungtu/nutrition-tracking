@@ -5,12 +5,12 @@ import Swal from 'sweetalert2'
 
 const AddFood = () => {
 
-    const [name, setName] = useState("")
-    const [calories, setCalories] = useState("")
-    const [protein, setProtein] = useState("")
-    const [carbonhydrates, setCarbonhydrates] = useState("")
-    const [fat, setFat] = useState("")
-    const [fiber, setFiber] = useState("")
+    const [name, setName] = useState("asd")
+    const [calories, setCalories] = useState("13")
+    const [protein, setProtein] = useState("123")
+    const [carbonhydrates, setCarbonhydrates] = useState("123")
+    const [fat, setFat] = useState("123")
+    const [fiber, setFiber] = useState("123")
     // const [imgUrl, setImgUrl] = useState("")
 
     const loggedUserData = useContext(UserContext)
@@ -29,13 +29,21 @@ const AddFood = () => {
         console.log('data', data)
 
         try {
-            fetch('http://localhost:5000/foods', {
+            fetch(`https://nutrition-tracking.vercel.app/foods`, {
                 method: 'POST',
+                // withCredentials: true,
+                // crossorigin: true,
+                // mode: 'no-cors',
                 body: JSON.stringify(data),
                 headers: {
                     "Authorization": `Bearer ${loggedUserData.loggedUser.accessToken}`,
-                    "Content-Type": "application/json"
-                }
+                    "Content-Type": "application/json",
+                    // 'Access-Control-Allow-Methods': 'GET,POST',
+                    'Access-Control-Allow-Origin': '*',
+                    // 'Access-Control-Allow-Credentials': 'true',
+                    // 'Access-Control-Allow-Headers': '',
+                    // 'Access-Control-Expose-Headers': '*',
+                },
             })
                 .then(res => res.json())
                 .then((data) => {
