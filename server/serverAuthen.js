@@ -84,7 +84,7 @@ app.post("/refeshToken", (req, res) => {
 
 app.post('/login', async (req, res) => {
     let userCred = req.body
-    // console.log(userCred);
+    console.log('userCred',userCred);
     try {
         const user = await userModel.findOne({ email: userCred.email })
         if (user !== null) {

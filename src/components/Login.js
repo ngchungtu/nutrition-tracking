@@ -30,12 +30,12 @@ const Login = () => {
     e.preventDefault()
     // console.log(userCreds);
 
-    // fetch('http://localhost:5500/login', {
-    fetch('https://nutrition-tracking.vercel.app/login', {
+    fetch('http://localhost:5500/login', {
+      // fetch('https://nutrition-tracking.vercel.app/login', {
       method: 'POST',
       // withCredentials: true,
       // crossorigin: true,
-      // mode: 'cors',
+      // mode: 'no-cors',
       body: JSON.stringify(userCreds),
       headers: {
         "Content-Type": "application/json",
@@ -65,6 +65,7 @@ const Login = () => {
       })
       .catch((error) => console.log(error))
   }
+
 
   return (
     <div className="form-parent">
