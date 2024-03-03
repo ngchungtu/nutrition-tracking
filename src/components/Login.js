@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../contexts/UserContext'
+import axios from 'axios'
 
 const Login = () => {
 
@@ -26,42 +27,40 @@ const Login = () => {
     })
   }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
     // console.log(userCreds);
 
-    fetch('http://localhost:5500/login', {
-      // fetch('https://nutrition-tracking.vercel.app/login', {
-      method: 'POST',
-      // withCredentials: true,
-      // crossorigin: true,
-      // mode: 'no-cors',
-      body: JSON.stringify(userCreds),
-      headers: {
-        "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*'
-      }
-    }).then((response) => {
-      if (response.status === 404) {
-        setMessage({ type: 'error', text: "Username or Email not found" });
-      } else if (response.status === 403) {
-        setMessage({ type: 'error', text: "Incorrect Password" });
-      }
-      // else if (response.status === 200) {
-      //   return response.json()
-      // }
-      setTimeout(() => {
-        setMessage({ type: 'invisible-msg', text: "" })
-      }, 5000)
-      return response.json()
-    })
-      .then((data) => {
-        // console.log('datas', data)
-        if (data.accessToken !== undefined) {
-          localStorage.setItem("nutrify-user", JSON.stringify(data))
-          loggedUserData.setLoggedUser(data)
-          navigate('/track')
+    // fetch('http://localhost:5500/login', {
+    //   method: 'POST',
+    //   withCredentials: true,
+    //   crossorigin: true,
+    //   mode: 'no-cors',
+    //   body: JSON.stringify(userCreds),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     'Access-Control-Allow-Origin': '*'
+    //   }
+    // })
+    await axios.post(`https://nutrition-tracker-api.vercel.app/login`, userCreds)
+      .then((response) => {
+        if (response.status === 404) {
+          setMessage({ type: 'error', text: "Username or Email not found" });
+        } else if (response.status === 403) {
+          setMessage({ type: 'error', text: "Incorrect Password" });
         }
+        else if (response.status === 200) {
+          console.log('response', response);
+          if (response.data.accessToken !== undefined) {
+            localStorage.setItem("nutrify-user", JSON.stringify(response.data))
+            loggedUserData.setLoggedUser(response.data)
+            navigate('/track')
+          }
+          return response
+        }
+        setTimeout(() => {
+          setMessage({ type: 'invisible-msg', text: "" })
+        }, 5000)
       })
       .catch((error) => console.log(error))
   }
