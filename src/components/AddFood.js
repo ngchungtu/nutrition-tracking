@@ -5,17 +5,17 @@ import Swal from 'sweetalert2'
 
 const AddFood = () => {
 
-    const [name, setName] = useState("asd")
-    const [calories, setCalories] = useState("13")
-    const [protein, setProtein] = useState("123")
-    const [carbonhydrates, setCarbonhydrates] = useState("123")
-    const [fat, setFat] = useState("123")
-    const [fiber, setFiber] = useState("123")
-    // const [imgUrl, setImgUrl] = useState("")
+    const [name, setName] = useState("")
+    const [calories, setCalories] = useState("")
+    const [protein, setProtein] = useState("")
+    const [carbonhydrates, setCarbonhydrates] = useState("")
+    const [fat, setFat] = useState("")
+    const [fiber, setFiber] = useState("")
+    // const [imgUrl, setImgUrl] = useState("")s
 
     const loggedUserData = useContext(UserContext)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e && e.preventDefault()
         const data = {
             name,
@@ -26,23 +26,14 @@ const AddFood = () => {
             fiber,
             // imgUrl: imgUrl ? "" : "https://semantic-ui.com/images/wireframe/image.png",
         }
-        console.log('data', data)
 
         try {
-            fetch(`https://nutrition-tracking.vercel.app/foods`, {
+            fetch(`https://nutrition-tracker-api.vercel.app/foods`, {
                 method: 'POST',
-                // withCredentials: true,
-                // crossorigin: true,
-                // mode: 'no-cors',
                 body: JSON.stringify(data),
                 headers: {
                     "Authorization": `Bearer ${loggedUserData.loggedUser.accessToken}`,
                     "Content-Type": "application/json",
-                    // 'Access-Control-Allow-Methods': 'GET,POST',
-                    'Access-Control-Allow-Origin': '*',
-                    // 'Access-Control-Allow-Credentials': 'true',
-                    // 'Access-Control-Allow-Headers': '',
-                    // 'Access-Control-Expose-Headers': '*',
                 },
             })
                 .then(res => res.json())
@@ -95,10 +86,10 @@ const AddFood = () => {
                 <label htmlFor='foodCarbon'>Carbonhydrates</label>
                 <input id='foodCarbon' type="number" value={carbonhydrates} onChange={(e) => setCarbonhydrates(e.target.value)} />
 
-                <label className='foodFat'>Fat</label>
+                <label className='foodFat'>Fat (Chất béo)</label>
                 <input id='foodFat' type="number" value={fat} onChange={(e) => setFat(e.target.value)} />
 
-                <label htmlFor='foodFiber'>Fiber</label>
+                <label htmlFor='foodFiber'>Fiber (Chất xơ)</label>
                 <input id='foodFiber' type="number" value={fiber} onChange={(e) => setFiber(e.target.value)} />
             </form>
             <div className='form-submit'>

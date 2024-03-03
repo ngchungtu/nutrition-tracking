@@ -19,7 +19,7 @@ const Diet = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/track/${loggedUserData.loggedUser.id}/${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`, {
+        fetch(`https://nutrition-tracker-api.vercel.app/track/${loggedUserData.loggedUser.id}/${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${loggedUserData.loggedUser.accessToken}`

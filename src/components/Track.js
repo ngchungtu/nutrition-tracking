@@ -14,7 +14,7 @@ const Track = () => {
 
     const searchFood = (e) => {
         if (e.target.value.length !== 0) {
-            fetch(`http://localhost:5000/foods/${e.target.value}`, {
+            fetch(`https://nutrition-tracker-api.vercel.app/foods/${e.target.value}`, {
                 method: 'GET',
                 headers: {
                     "Authorization": `Bearer ${loggedUserData.loggedUser.accessToken}`

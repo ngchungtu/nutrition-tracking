@@ -7,7 +7,7 @@ const FoodList = () => {
   const [foodList, setFoodList] = useState([])
 
   const handleFetchFoods = () => {
-    fetch(`http://localhost:5000/foods`, {
+    fetch(`https://nutrition-tracker-api.vercel.app/foods`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${loggedUserData.loggedUser.accessToken}`

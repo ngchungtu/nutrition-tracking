@@ -26,7 +26,7 @@ const Register = () => {
         e.preventDefault()
         console.log(userDetails);
 
-        fetch('http://localhost:5500/register', {
+        fetch('https://nutrition-tracker-api.vercel.app/register', {
             method: 'POST',
             body: JSON.stringify(userDetails),
             headers: {
