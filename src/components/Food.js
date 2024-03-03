@@ -50,7 +50,7 @@ const Food = ({ item }) => {
             },
             quantity: eatenQuantity,
         }
-        // console.log('trackFood', track);
+        console.log('trackFood', track);
         // console.log('user token', loggedUserData.loggedUser.id);
 
         fetch('https://nutrition-tracker-api.vercel.app/track', {
@@ -61,7 +61,6 @@ const Food = ({ item }) => {
                 "Content-Type": "application/json"
             }
         })
-            .then((res) => res.json())
             .then((data) => {
                 console.log(data);
             })
@@ -79,31 +78,31 @@ const Food = ({ item }) => {
                 <h3><span>{food.name}</span> ({food.calories} Calo trong {eatenQuantity} gr)</h3>
 
                 <div className='nutrient-content'>
-                <div className="nutrient">
-                    <p className="n-title">Protein (Chất đạm)</p>
-                    <p className="n-value">{food.protein} gr</p>
-                </div>
+                    <div className="nutrient">
+                        <p className="n-title">Protein (Chất đạm)</p>
+                        <p className="n-value">{food.protein} gr</p>
+                    </div>
 
-                <div className="nutrient">
-                    <p className="n-title">Carbonhydate</p>
-                    <p className="n-value">{food.carbonhydrates} gr</p>
-                </div>
+                    <div className="nutrient">
+                        <p className="n-title">Carbonhydate</p>
+                        <p className="n-value">{food.carbonhydrates} gr</p>
+                    </div>
 
-                <div className="nutrient">
-                    <p className="n-title">Fat (Chất béo)</p>
-                    <p className="n-value">{food.fat} gr</p>
-                </div>
+                    <div className="nutrient">
+                        <p className="n-title">Fat (Chất béo)</p>
+                        <p className="n-value">{food.fat} gr</p>
+                    </div>
 
-                <div className="nutrient">
-                    <p className="n-title">Fiber (Chất xơ)</p>
-                    <p className="n-value">{food.fiber} gr</p>
-                </div>
+                    <div className="nutrient">
+                        <p className="n-title">Fiber (Chất xơ)</p>
+                        <p className="n-value">{food.fiber} gr</p>
+                    </div>
                 </div>
 
                 <div className='track-control'>
-                <h3>Lượng dinh dưỡng theo số lượng thực phẩm</h3>
+                    <h3>Lượng dinh dưỡng theo số lượng thực phẩm</h3>
                     <input type='number' onChange={calcMacros} className="inp" placeholder="Số lượng tính bằng Gram" />
-                    <button className='btn' onClick={trackFood}>Kiểm tra dinh dưỡng</button>
+                    <button className='btn' onClick={() => trackFood()}>Kiểm tra dinh dưỡng</button>
                 </div>
             </div>
         </>
