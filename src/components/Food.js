@@ -1,17 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../contexts/UserContext'
-// import Header from './Header';
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Food = ({ item }) => {
 
     const [food, setFood] = useState({})
     const [eatenQuantity, setEatenQuantity] = useState();
     const [foodInitial, setFoodInitial] = useState({})
+    const [loading, setLoading] = useState(false);
 
     const loggedUserData = useContext(UserContext)
 
     // console.log('loggedUserData', loggedUserData);
     // console.log('food', item);
+    const navigate = useNavigate()
 
     useEffect(() => {
         setFood(item)
@@ -25,7 +28,7 @@ const Food = ({ item }) => {
             setEatenQuantity(quantity)
 
             let copyFood = { ...food }
-            console.log(copyFood);
+            // console.log(copyFood);
 
             copyFood.protein = (foodInitial.protein * quantity) / 100;
             copyFood.calories = (foodInitial.calories * quantity) / 100;
@@ -38,7 +41,8 @@ const Food = ({ item }) => {
     }
 
     const trackFood = async () => {
-        let track = {
+        setLoading(true)
+        const track = {
             userId: loggedUserData.loggedUser.id,
             foodId: food._id,
             details: {
@@ -50,10 +54,11 @@ const Food = ({ item }) => {
             },
             quantity: eatenQuantity,
         }
+
         console.log('trackFood', track);
         // console.log('user token', loggedUserData.loggedUser.id);
 
-        fetch(`${process.env.REACT_APP_BASE_URL_API}/track`, {
+        await fetch(`${process.env.REACT_APP_BASE_URL_API}/track`, {
             method: 'POST',
             body: JSON.stringify(track),
             headers: {
@@ -61,11 +66,20 @@ const Food = ({ item }) => {
                 "Content-Type": "application/json"
             }
         })
-            .then((data) => {
-                console.log(data);
+            // await axios.post(`${process.env.REACT_APP_BASE_URL_API}/track`, JSON.stringify(track), {
+            //     headers: {
+            //         "Authorization": `Bearer ${loggedUserData.loggedUser.accessToken}`,
+            //         "Content-Type": "application/json"
+            //     }
+            // })
+            .then((response) => {
+                console.log(response);
+                setLoading(false)
+                navigate('/')
             })
             .catch((err) => {
                 console.log(err);
+                setLoading(false)
             })
     }
 
@@ -102,7 +116,12 @@ const Food = ({ item }) => {
                 <div className='track-control'>
                     <h3>Lượng dinh dưỡng theo số lượng thực phẩm</h3>
                     <input type='number' onChange={calcMacros} className="inp" placeholder="Số lượng tính bằng Gram" />
-                    <button className='btn' onClick={() => trackFood()}>Kiểm tra dinh dưỡng</button>
+
+                    {
+                        loading
+                            ? <div className="loader"></div>
+                            : <button className='btn' onClick={() => trackFood()}>Lưu thông tin lượng dinh dưỡng</button>
+                    }
                 </div>
             </div>
         </>

@@ -30,22 +30,28 @@ const Track = () => {
                         setFoodItems([])
                     }
                 })
-                .catch((error) => console.log(error))
+                .catch((error) => {
+                    console.log(error)
+                })
         } else {
             setFoodItems([])
         }
     }
 
     const handleChoseFood = (food) => {
-        setFood(food)
-        setShowChose(true)
+        if (food) {
+            setFood(food)
+            setShowChose(true)
+        } else {
+            return;
+        }
     }
 
     return (
         <>
             <section className="container track-container">
                 <div className="search">
-                    <input onChange={searchFood} className='search-inp' type='search' placeholder='Tìm kiếm thực phẩm...' />
+                    <input onChange={searchFood} className='search-inp' type='search' placeholder="Tìm kiếm thực phẩm..."/>
 
                     {
                         foodItems.length !== 0 && !showChose ? (

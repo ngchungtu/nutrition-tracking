@@ -170,6 +170,7 @@ a {
   height: auto;
   /* background-color: blue; */
   border-radius: 5px;
+  margin: 0 15px;
 }
 
 .food-image {
