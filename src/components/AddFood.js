@@ -28,7 +28,7 @@ const AddFood = () => {
         }
 
         try {
-            fetch(`https://nutrition-tracker-api.vercel.app/foods`, {
+            fetch(`${process.env.REACT_APP_BASE_URL_API}/foods`, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

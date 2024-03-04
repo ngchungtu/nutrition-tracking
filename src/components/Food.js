@@ -53,7 +53,7 @@ const Food = ({ item }) => {
         console.log('trackFood', track);
         // console.log('user token', loggedUserData.loggedUser.id);
 
-        fetch('https://nutrition-tracker-api.vercel.app/track', {
+        fetch(`${process.env.REACT_APP_BASE_URL_API}/track`, {
             method: 'POST',
             body: JSON.stringify(track),
             headers: {

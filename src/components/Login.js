@@ -7,7 +7,7 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const loggedUserData = useContext(UserContext)
-  // console.log('loggedInUserData', loggedInUserData);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate()
 
@@ -42,19 +42,27 @@ const Login = () => {
     //     'Access-Control-Allow-Origin': '*'
     //   }
     // })
-    await axios.post(`https://nutrition-tracker-api.vercel.app/login`, userCreds)
+    setLoading(true)
+    await axios.post(`${process.env.REACT_APP_BASE_URL_API}/login`, userCreds)
       .then((response) => {
         if (response.status === 404) {
           setMessage({ type: 'error', text: "Username or Email not found" });
+          setLoading(false)
         } else if (response.status === 403) {
           setMessage({ type: 'error', text: "Incorrect Password" });
+          setLoading(false)
         }
         else if (response.status === 200) {
+          setLoading(true)
           console.log('response', response);
           if (response.data.accessToken !== undefined) {
+            setLoading(false)
             localStorage.setItem("nutrify-user", JSON.stringify(response.data))
             loggedUserData.setLoggedUser(response.data)
             navigate('/track')
+          } else {
+            setMessage({ type: 'error', text: "Cannot Login" });
+            setLoading(false)
           }
           return response
         }
@@ -84,8 +92,12 @@ const Login = () => {
             }
           </div>
 
-          <button className="btn">Đăng nhập</button>
-          <p>Chưa có tài khoản ? <Link to="/register">Đăng kí</Link></p>
+          {
+            loading
+              ? <div className="loader"></div>
+              : <button className="btn">Đăng nhập</button>
+          }
+          <p>Chưa có tài khoản ? <Link to="/register">Đăng kí <i className="ri-arrow-right-circle-line"></i></Link></p>
           <p className={message.type}>{message.text}</p>
         </div>
       </form>

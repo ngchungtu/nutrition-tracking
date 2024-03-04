@@ -7,7 +7,7 @@ const FoodList = () => {
   const [foodList, setFoodList] = useState([])
 
   const handleFetchFoods = () => {
-    fetch(`https://nutrition-tracker-api.vercel.app/foods`, {
+    fetch(`${process.env.REACT_APP_BASE_URL_API}/foods`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${loggedUserData.loggedUser.accessToken}`
@@ -38,10 +38,10 @@ const FoodList = () => {
                 <div className='foodList-nutrition'>
                   <span>Lượng dinh dưỡng: </span>
                   <p className='foodList-calo'>Calories: <span>{food.calories}</span></p>
-                  <p className='foodList-fat'>Fat: <span>{food.fat}</span></p>
+                  <p className='foodList-fat'>Fat (Chất béo): <span>{food.fat}</span></p>
                   <p className='foodList-carbo'>Carbohydrates: <span>{food.carbonhydrates}</span></p>
                   <p className='foodList-protein'>Protein: <span>{food.protein}</span></p>
-                  <p className='foodList-fiber'>Fiber: <span>{food.fiber}</span></p>
+                  <p className='foodList-fiber'>Fiber (Chất xơ): <span>{food.fiber}</span></p>
                 </div>
               </div>
             </div>
