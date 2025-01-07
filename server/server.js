@@ -13,7 +13,7 @@ app.use(cors())
 const PORT = process.env.PORT
 
 app.use(express.json({ limit: '50mb' }))
-app.use(express.urlencoded({ extended: true, limit: '50mb' }))
+app.use(express.urlencoded({ extended: true, limit: '500mb' }))
 /* #region  func connection to MongoDB */
 // const connectToMongo = async () => {
 //     try {
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }))
 app.listen(PORT, () => {
     try {
         connectToMongo()
-        console.log(`Connect to DB successfully, port: ${PORT}`);
+        console.log(`Connect to port: ${PORT}`);
     } catch (error) {
         console.log(err_types.errLog[500]);
     }

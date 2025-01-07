@@ -8,6 +8,7 @@ export const connectToMongo = async () => {
         await mongoose.connect(process.env.MONGO)
         console.log('Connect Successfully!');
     } catch (error) {
+        console.log('Connect Failed');
         console.log(err_types.errLog[404]);
     }
 }
